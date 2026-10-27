@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  python_min: "3.11"
+  version: "2026.10.2"
+
+package:
+  name: pyvale
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/p/pyvale/pyvale-${{ version }}.tar.gz
+  sha256: e3832b757646c9921a9e27c64a919b95f5b74dff720659e6284616e568d30cf8
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=61.0
+    - wheel
+    - cython >=3.0.0
+    - numpy >=2.0.0
+    - pybind11 >=2.13.6
+    - scikit-build-core >=0.11.6
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - numpy >=2.0.0
+    - numba >=0.60
+    - scipy >=1.14.0
+    - matplotlib-base >=3.8
+    - pyvista >=0.43.3
+    - vtk >=9.5.2
+    - netcdf4 ==1.7.5
+    - sympy >=1.13.0
+    - pyqt6 >=6.7.1
+    - imageio >=2.36.1
+    - imageio-ffmpeg >=0.5.1
+    - pyyaml >=6.0.0
+    - pyqtgraph >=0.13.7
+    - opencv >=4.13.0.92
+    - pandas >=2.3.1
+    - riley-raster ==2026.10.1
+
+tests:
+  - python:
+      imports:
+        - pyvale
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+
+about:
+  summary: "Your virtual engineering lab: An all-in-one package for simulation-driven experimental design."
+  license: MIT
+  license_file: LICENSE
+  homepage: https://pypi.org/project/pyvale/
+
+extra:
+  recipe-maintainers:
+    - meganasampson
+    - ScepticalRabbit
+    - JoelPhys
